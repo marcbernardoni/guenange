@@ -15,15 +15,15 @@
     "Diamontis",
     "Guénange 2022"
   ],
-  "main": "index.js",
+  "main": "./dist/index.js",
   "scripts": {
     "lint": "eslint . --ext .js",
     "lint:fix": "eslint . --ext .js --fix",
     "prettier": "prettier --config .prettierrc './dist/**/*.js' --write"
   },
-  "husky" : {
+  "husky": {
     "hooks": {
-        "pre-commit": "npm run prettier && npm run lint"
+      "pre-commit": "npm run prettier && npm run lint"
     }
   },
   "devDependencies": {
@@ -34,6 +34,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "husky": "^8.0.2",
+    "import": "^0.0.6",
     "prettier": "^2.7.1"
   }
 }
