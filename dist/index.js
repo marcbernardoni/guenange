@@ -14,20 +14,16 @@ window.addEventListener('load', () => {
       this.mouse = new InputHandler(this)
     }
 
-    update() {}
+    static update() {}
 
     draw(context) {
-      this.mouse.draw(context)
       context.clearRect(0, 0, canvas.width, canvas.heigth)
+      this.mouse.draw(context)
     }
   }
 
-  const game = new Game(
-    canvas.width,
-    canvas.height,
-    canvas.offsetLeft,
-    canvas.offsetTop
-  )
+  const game = new Game(canvas.width, canvas.height)
+
   function animate() {
     requestAnimationFrame(animate)
     game.update()

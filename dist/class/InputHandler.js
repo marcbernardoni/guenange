@@ -1,12 +1,10 @@
 export default class InputHandler {
   constructor(game) {
     this.game = game
-    this.width = 50
-    this.height = 50
-    this.elementX = document.querySelector('.coordX')
-    this.elementY = document.querySelector('.coordY')
-    this.mouseX = 0
-    this.mouseY = 0
+    this.radius = 20
+    this.sAngle = 0 // The starting angle in radians
+    this.eAngle = 2 * Math.PI // The ending angle in radians
+    this.debugMode = true
 
     window.addEventListener('mousemove', (event) => {
       event.preventDefault()
@@ -16,16 +14,42 @@ export default class InputHandler {
         this.mouseY = event.layerY
       }
     })
+
+    if (this.debugMode) {
+      this.debugModeOn()
+    }
   }
 
-  // update() {}
+  static debugModeOn() {
+    const div = document.createElement('div')
+    div.id = 'debug'
+    div.innerHTML =
+      '<p>Position de la souris en abscisse (axe des X) : <span class="coordX"></span></p>'
+    div.innerHTML +=
+      '<p>Position de la souris en ordonnée (axe des Y) : <span class="coordY"></span></p>'
+    document.body.appendChild(div)
+  }
+
+  static update() {}
 
   draw(context) {
-    this.elementX.innerHTML = this.mouseX
-    this.elementY.innerHTML = this.mouseY
+    context.fillStyle = '#4d79bc'
+    context.fillRect(0, 0, this.game.width, this.game.height)
 
-    context.beginPath()
-    context.arc(this.mouseX, this.mouseY, 20, 0, Math.PI * 2)
-    context.stroke()
+    if (this.debugMode) {
+      const eX = document.querySelector('.coordX')
+      const eY = document.querySelector('.coordY')
+      eX.innerHTML = this.mouseX
+      eY.innerHTML = this.mouseY
+      context.beginPath()
+      context.arc(
+        this.mouseX,
+        this.mouseY,
+        this.radius,
+        this.sAngle,
+        this.eAngle
+      )
+      context.stroke()
+    }
   }
 }
