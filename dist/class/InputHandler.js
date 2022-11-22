@@ -5,6 +5,8 @@ export default class InputHandler {
     this.sAngle = 0 // The starting angle in radians
     this.eAngle = 2 * Math.PI // The ending angle in radians
     this.debugMode = true
+    this.div = document.createElement('div')
+    this.div.id = 'debug'
 
     window.addEventListener('mousemove', (event) => {
       event.preventDefault()
@@ -17,20 +19,27 @@ export default class InputHandler {
 
     if (this.debugMode) {
       this.debugModeOn()
+    } else this.debugModeOff()
+  }
+
+  debugModeOn() {
+    this.div.innerHTML =
+      '<p>Position de la souris en abscisse (axe des X) : <span class="coordX"></span></p>'
+    this.div.innerHTML +=
+      '<p>Position de la souris en ordonnée (axe des Y) : <span class="coordY"></span></p>'
+    document.body.appendChild(this.div)
+  }
+
+  debugModeOff() {
+    if (document.body.contains(document.querySelector('#debug'))) {
+      document.querySelector('#debug').remove()
     }
   }
 
-  static debugModeOn() {
-    const div = document.createElement('div')
-    div.id = 'debug'
-    div.innerHTML =
-      '<p>Position de la souris en abscisse (axe des X) : <span class="coordX"></span></p>'
-    div.innerHTML +=
-      '<p>Position de la souris en ordonnée (axe des Y) : <span class="coordY"></span></p>'
-    document.body.appendChild(div)
+  update() {
+    this.game.mouseX = this.mouseX
+    this.game.mouseY = this.mouseY
   }
-
-  static update() {}
 
   draw(context) {
     context.fillStyle = '#4d79bc'

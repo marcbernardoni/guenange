@@ -13,6 +13,7 @@
     "plugins": ["prettier", "import"],
     "rules":{
         "no-console": "warn",
+        "class-methods-use-this": "off",
         "import/extensions": "off",
         "prettier/prettier": "error"
     }

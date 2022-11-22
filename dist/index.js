@@ -12,9 +12,10 @@ window.addEventListener('load', () => {
       this.width = width
       this.height = height
       this.mouse = new InputHandler(this)
+      this.toto = 'toto'
     }
 
-    static update() {}
+    update() {}
 
     draw(context) {
       context.clearRect(0, 0, canvas.width, canvas.heigth)
